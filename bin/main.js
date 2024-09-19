@@ -1,21 +1,18 @@
 #!/usr/bin/env node
 'use strict';
 const fs = require('node:fs');
-const path = require('node:path');
 
 const tasksData = __dirname + '/../tasksData.json';
 const command = process.argv[2];
 
-// debug
-process.argv.forEach((val, index, array) => {
-  console.log(`${index}: ${val}`)
+// Check if file exists before trying to use the program
+fs.readFile(tasksData, 'utf8', (err) => {
+  if (err) {
+    createNewTasksData();
+    return;
+  }
 });
 
-function addTask(){
-  const taskName = process.argv[3];
-}
-
-console.log(command);
 switch (command) {
   case 'add':
     addTask();
@@ -25,12 +22,11 @@ switch (command) {
     break;
 }
 
-fs.readFile(tasksData, 'utf8', (err, data) => {
-  if (err) {
-    createNewTasksData();
-    return;
-  }
-});
+function addTask(){
+  const taskName = process.argv[3];
+  console.log(taskName);
+}
+
 
 function createNewTasksData() {
   const content = {
