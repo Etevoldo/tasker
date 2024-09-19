@@ -31,12 +31,27 @@ switch (command) {
     console.log('we aint adding');
     break;
 }
-
+//todo split this in another file
 function addTask(){
-  const taskName = process.argv[3];
+  const taskDescription = process.argv[3];
+  const time = new Date().toJSON();
 
-  console.log(taskName);
+  const newTask = {
+    "id": taskList.qty,
+    "description": taskDescription,
+    "status": "todo",
+    "createdAt": time,
+    "updatedAt": time
+  };
 
+  taskList.tasks.push(newTask);
+  taskList.qty++;
+  fs.writeFile(tasksData, JSON.stringify(taskList), (err) => {
+    if (err) {
+      console.error(err);
+    }
+    console.log(`Task: ${taskDescription} saved succeefully!`);
+  });
 }
 
 function createNewTasksData() {
