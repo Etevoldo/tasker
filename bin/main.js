@@ -15,13 +15,13 @@ catch(err) {
 }
 
 //loading taskList from the taskData to further operations later
+let taskList;
 try {
-  let taskList = JSON.parse(fs.readFileSync(tasksData, 'utf8'));
+  taskList = JSON.parse(fs.readFileSync(tasksData, 'utf8'));
 }
 catch (err) {
-  console.error(`Couldn't open tasksData: ${err}`)
+  console.error(`Couldn't open tasksData: ${err}`);
 }
-
 
 switch (command) {
   case 'add':
