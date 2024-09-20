@@ -21,6 +21,10 @@ switch (command) {
     let description = process.argv[3]
     taskData.add(description);
     break;
+  case 'update':
+    const id = process.argv[3];
+    const UpdatedDescripton = process.argv[4];
+    taskData.update(id, UpdatedDescripton);
   default:
     console.log('we aint adding');
     break;

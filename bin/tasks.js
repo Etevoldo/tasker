@@ -33,4 +33,22 @@ exports.Tasks = class Tasks {
       console.log(`Task: ${description} saved succeefully!`);
     });
   }
+
+  update(id, UpdatedDescripton) {
+    let taskToUpdate = this.tasksData.taskList[id];
+
+    const time = new Date().toJSON();
+    const oldDescription = taskToUpdate.description;
+
+    taskToUpdate.description = UpdatedDescripton;
+    taskToUpdate.updatedAt = time;
+
+    fs.writeFile(this.path, JSON.stringify(this.tasksData), (err) => {
+      if (err) {
+        console.error(err);
+      }
+      console.log('Task: #' + id + ' "' + oldDescription
+          + '"\nUpdated to: "' + UpdatedDescripton + '"\nSucceefully!');
+    });
+  }
 }
