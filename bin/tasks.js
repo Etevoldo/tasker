@@ -69,7 +69,33 @@ exports.Tasks = class Tasks {
     });
   }
 
+  list() {
+    const filter = process.argv[3];
 
+    function listElement(element) {
+      console.log(
+        "#" + element.id +
+        "\nDescription: " + element.description +
+        "\nStatus: " + element.status +
+        "\nCreated: " + new Date(element.createdAt).toLocaleString() +
+        "\nLast Updated: " + new Date(element.updatedAt).toLocaleString() +
+        "\n"
+      );
+    }
+
+    if (!filter) {
+      this.tasksData.taskList.forEach((element) => {
+        listElement(element);
+      });
+    }
+    else {
+      const filteredArray = this.tasksData.taskList.filter((element) =>
+        element.status === filter
+      );
+
+      filteredArray.forEach((element) => { listElement(element); });
+    }
+  }
 
   #findIndexById(id) {
     const taskList = this.tasksData.taskList;
