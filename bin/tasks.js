@@ -38,7 +38,7 @@ exports.Tasks = class Tasks {
   update() {
     const id = process.argv[3];
     const UpdatedDescripton = process.argv[4];
-    const taskToUpdate = this.tasksData.taskList[this.#findById(id)];
+    const taskToUpdate = this.tasksData.taskList[this.#findIndexById(id)];
     const oldDescription = taskToUpdate.description;
 
     taskToUpdate.description = UpdatedDescripton;
@@ -55,7 +55,7 @@ exports.Tasks = class Tasks {
 
   delete() {
     const id = process.argv[3];
-    const index = this.#findById(id);
+    const index = this.#findIndexById(id);
     const oldDescription = this.tasksData.taskList[index].description;
 
     this.tasksData.taskList.splice(index, 1);
@@ -69,7 +69,8 @@ exports.Tasks = class Tasks {
     });
   }
 
-  #findById(id) {
+
+  #findIndexById(id) {
     const taskList = this.tasksData.taskList;
     const found = taskList.find((task) => task.id == id);
     return taskList.indexOf(found);
