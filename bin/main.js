@@ -18,13 +18,14 @@ let taskData = new tasks.Tasks(tasksDataPath);
 
 switch (command) {
   case 'add':
-    let description = process.argv[3]
-    taskData.add(description);
+    taskData.add();
     break;
   case 'update':
-    const id = process.argv[3];
-    const UpdatedDescripton = process.argv[4];
-    taskData.update(id, UpdatedDescripton);
+    taskData.update();
+    break;
+  case 'delete':
+    taskData.delete();
+    break;
   default:
     console.log('we aint adding');
     break;

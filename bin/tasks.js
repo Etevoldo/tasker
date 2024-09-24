@@ -13,7 +13,8 @@ exports.Tasks = class Tasks {
     }
   }
 
-  add(description){
+  add(){
+    const description = process.argv[3];
     const time = new Date().toJSON();
 
     const newTask = {
@@ -34,7 +35,9 @@ exports.Tasks = class Tasks {
     });
   }
 
-  update(id, UpdatedDescripton) {
+  update() {
+    const id = process.argv[3];
+    const UpdatedDescripton = process.argv[4];
     let taskToUpdate = this.tasksData.taskList[id];
 
     const time = new Date().toJSON();
@@ -49,6 +52,21 @@ exports.Tasks = class Tasks {
       }
       console.log('Task: #' + id + ' "' + oldDescription
           + '"\nUpdated to: "' + UpdatedDescripton + '"\nSucceefully!');
+    });
+  }
+
+  delete() {
+    const id = process.argv[3];
+    const oldDescription = this.tasksData.taskList[id].description;
+    delete this.tasksData.taskList[id];
+    console.log(this.tasksData.taskList);
+
+    fs.writeFile(this.path, JSON.stringify(this.tasksData), (err) => {
+      if (err) {
+        console.error(err);
+      }
+      console.log('Task: #' + id + ' "' + oldDescription
+          + '\n Deleted Succeefully!');
     });
   }
 }
