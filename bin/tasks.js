@@ -37,21 +37,19 @@ exports.Tasks = class Tasks {
 
   update() {
     const id = process.argv[3];
-    const index = this.#findById(id);
     const UpdatedDescripton = process.argv[4];
-    let taskToUpdate = this.tasksData.taskList[index];
-    const time = new Date().toJSON();
+    const taskToUpdate = this.tasksData.taskList[this.#findById(id)];
     const oldDescription = taskToUpdate.description;
 
     taskToUpdate.description = UpdatedDescripton;
-    taskToUpdate.updatedAt = time;
+    taskToUpdate.updatedAt = new Date().toJSON();
 
     fs.writeFile(this.path, JSON.stringify(this.tasksData), (err) => {
       if (err) {
         console.error(err);
       }
-      console.log('Task: #' + id + ' "' + oldDescription
-          + '"\nUpdated to: "' + UpdatedDescripton + '"\nSucceefully!');
+      console.log('Task #' + id + ' "' + oldDescription
+          + '"\nUpdated to: "' + UpdatedDescripton + '"\nSuccefully!');
     });
   }
 
@@ -61,14 +59,13 @@ exports.Tasks = class Tasks {
     const oldDescription = this.tasksData.taskList[index].description;
 
     this.tasksData.taskList.splice(index, 1);
-    console.log(this.tasksData.taskList);
 
     fs.writeFile(this.path, JSON.stringify(this.tasksData), (err) => {
       if (err) {
         console.error(err);
       }
-      console.log('Task: #' + id + ' "' + oldDescription
-          + '\n Deleted Succeefully!');
+      console.log('Task #' + id + ' "' + oldDescription
+          + '\nDeleted Succefully!');
     });
   }
 
