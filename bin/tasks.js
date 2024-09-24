@@ -37,9 +37,9 @@ exports.Tasks = class Tasks {
 
   update() {
     const id = process.argv[3];
+    const index = this.#findById(id);
     const UpdatedDescripton = process.argv[4];
-    let taskToUpdate = this.tasksData.taskList[id];
-
+    let taskToUpdate = this.tasksData.taskList[index];
     const time = new Date().toJSON();
     const oldDescription = taskToUpdate.description;
 
@@ -57,8 +57,10 @@ exports.Tasks = class Tasks {
 
   delete() {
     const id = process.argv[3];
-    const oldDescription = this.tasksData.taskList[id].description;
-    delete this.tasksData.taskList[id];
+    const index = this.#findById(id);
+    const oldDescription = this.tasksData.taskList[index].description;
+
+    this.tasksData.taskList.splice(index, 1);
     console.log(this.tasksData.taskList);
 
     fs.writeFile(this.path, JSON.stringify(this.tasksData), (err) => {
@@ -68,5 +70,11 @@ exports.Tasks = class Tasks {
       console.log('Task: #' + id + ' "' + oldDescription
           + '\n Deleted Succeefully!');
     });
+  }
+
+  #findById(id) {
+    const taskList = this.tasksData.taskList;
+    const found = taskList.find((task) => task.id == id);
+    return taskList.indexOf(found);
   }
 }
