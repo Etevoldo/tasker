@@ -53,7 +53,7 @@ exports.Tasks = class Tasks {
     });
   }
 
-  delete() {
+  exclude() {
     const id = process.argv[3];
     const index = this.#findIndexById(id);
     const oldDescription = this.tasksData.taskList[index].description;
@@ -68,6 +68,7 @@ exports.Tasks = class Tasks {
           + '\nDeleted Succefully!');
     });
   }
+
 
 
   #findIndexById(id) {

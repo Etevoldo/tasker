@@ -24,7 +24,10 @@ switch (command) {
     taskData.update();
     break;
   case 'delete':
-    taskData.delete();
+    taskData.exclude();
+    break;
+  case 'list':
+    taskData.list();
     break;
   default:
     console.log('we aint adding');
