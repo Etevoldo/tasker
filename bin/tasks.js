@@ -13,8 +13,7 @@ exports.Tasks = class Tasks {
     }
   }
 
-  add(){
-    const description = process.argv[3];
+  add(description){
     const time = new Date().toJSON();
 
     const newTask = {
@@ -35,9 +34,7 @@ exports.Tasks = class Tasks {
     });
   }
 
-  update() {
-    const id = process.argv[3];
-    const UpdatedDescripton = process.argv[4];
+  update(id, UpdatedDescripton) {
     const taskToUpdate = this.tasksData.taskList[this.#findIndexById(id)];
     const oldDescription = taskToUpdate.description;
 
@@ -53,8 +50,7 @@ exports.Tasks = class Tasks {
     });
   }
 
-  exclude() {
-    const id = process.argv[3];
+  exclude(id) {
     const index = this.#findIndexById(id);
     const oldDescription = this.tasksData.taskList[index].description;
 
@@ -69,8 +65,7 @@ exports.Tasks = class Tasks {
     });
   }
 
-  list() {
-    const filter = process.argv[3];
+  list(filter) {
 
     function listElement(element) {
       console.log(

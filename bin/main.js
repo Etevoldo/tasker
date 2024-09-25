@@ -18,16 +18,21 @@ let taskData = new tasks.Tasks(tasksDataPath);
 
 switch (command) {
   case 'add':
-    taskData.add();
+    const description = process.argv[3];
+    taskData.add(description);
     break;
   case 'update':
-    taskData.update();
+    const idToUpdate = process.argv[3];
+    const UpdatedDescripton = process.argv[4];
+    taskData.update(idToUpdate, UpdatedDescripton);
     break;
   case 'delete':
-    taskData.exclude();
+    const idToExclude = process.argv[3];
+    taskData.exclude(idToExclude);
     break;
   case 'list':
-    taskData.list();
+    const filter = process.argv[3];
+    taskData.list(filter);
     break;
   case 'mark-in-progress':
     taskData.markStatus('in-progress');
@@ -36,7 +41,7 @@ switch (command) {
     taskData.markStatus('done');
     break;
   default:
-    console.log('we aint adding');
+    console.log(`Unknown command: ${command}`);
     break;
 }
 
@@ -50,7 +55,7 @@ function createNewTasksData() {
     fs.writeFileSync(tasksDataPath, JSON.stringify(content));
   }
   catch (err) {
-    console.error(`can't create new tasks data file: ${err}`);
+    console.error(`Can't create new tasks data file: ${err}`);
     return;
   }
   console.log("Created new tasks data file");
