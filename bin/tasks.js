@@ -97,6 +97,18 @@ exports.Tasks = class Tasks {
     }
   }
 
+  markStatus(newStatus) {
+    const id = process.argv[3];
+    this.tasksData.taskList[this.#findIndexById(id)].status = newStatus;
+
+    fs.writeFile(this.path, JSON.stringify(this.tasksData), (err) => {
+      if (err) {
+        console.error(err);
+      }
+      console.log(`Task #${id} marked to: ${newStatus}`);
+    });
+  }
+
   #findIndexById(id) {
     const taskList = this.tasksData.taskList;
     const found = taskList.find((task) => task.id == id);

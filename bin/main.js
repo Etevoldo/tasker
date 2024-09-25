@@ -29,6 +29,12 @@ switch (command) {
   case 'list':
     taskData.list();
     break;
+  case 'mark-in-progress':
+    taskData.markStatus('in-progress');
+    break;
+  case 'mark-done':
+    taskData.markStatus('done');
+    break;
   default:
     console.log('we aint adding');
     break;
