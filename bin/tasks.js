@@ -55,6 +55,7 @@ exports.Tasks = class Tasks {
     const oldDescription = this.tasksData.taskList[index].description;
 
     this.tasksData.taskList.splice(index, 1);
+    this.tasksData.qty--;
 
     fs.writeFile(this.path, JSON.stringify(this.tasksData), (err) => {
       if (err) {
