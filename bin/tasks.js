@@ -17,7 +17,7 @@ exports.Tasks = class Tasks {
     const time = new Date().toJSON();
 
     const newTask = {
-      "id": this.tasksData.qty,
+      "id": this.tasksData.uniqueIdIndex,
       "description": description,
       "status": "todo",
       "createdAt": time,
@@ -25,7 +25,7 @@ exports.Tasks = class Tasks {
     };
 
     this.tasksData.taskList.push(newTask);
-    this.tasksData.qty++;
+    this.tasksData.uniqueIdIndex++;
     fs.writeFile(this.path, JSON.stringify(this.tasksData), (err) => {
       if (err) {
         console.error(err);
@@ -55,7 +55,6 @@ exports.Tasks = class Tasks {
     const oldDescription = this.tasksData.taskList[index].description;
 
     this.tasksData.taskList.splice(index, 1);
-    this.tasksData.qty--;
 
     fs.writeFile(this.path, JSON.stringify(this.tasksData), (err) => {
       if (err) {

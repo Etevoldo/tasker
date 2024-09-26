@@ -47,7 +47,7 @@ switch (command) {
 
 function createNewTasksData() {
   const content = {
-    "qty": 0,
+    "uniqueIdIndex": 0,
     "taskList": []
   };
 
